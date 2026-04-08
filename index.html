@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siyuan Li (黎思源)</title>
+    <title>陈荣威 | Personal CV</title>
+    <meta name="description" content="陈荣威个人简历网站">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
@@ -17,361 +19,396 @@
         <div class="container header-container">
             <button id="theme-toggle" class="theme-toggle">🌛</button>
             <div class="profile-info">
-                <h1>Siyuan Li <span class="chinese-name">(黎思源)</span></h1>
-                <p class="subtitle"><b>🤖 Artificial Intelligence Student</b></p>
-                <p><span class="icon">📞</span> Tel: (+86) 13815397394</p>
-                <p><span class="icon">✉️</span> Email: <a href="mailto:1793706453@qq.com">1793706453@qq.com</a> &amp; <a href="mailto:liaoyanqing666@gmail.com">liaoyanqing666@gmail.com</a></p>
-                <p><span class="icon">💬</span> WeChat: abcdefghi314159</p>
+                <h1>
+                    <span data-lang="en">Chen Rongwei <span class="chinese-name">(陈荣威)</span></span>
+                    <span data-lang="zh" style="display:none;">陈荣威</span>
+                </h1>
+                <div class="language-switcher">
+                    <button id="lang-en" class="lang-button active" type="button">EN</button>
+                    <button id="lang-zh" class="lang-button" type="button">中文</button>
+                </div>
+                <p class="subtitle">
+                    <b data-lang="en">Product-Oriented Data Analysis / Risk Control / Strategy Research</b>
+                    <b data-lang="zh" style="display:none;">数据分析 / 风险控制 / 产品策略方向</b>
+                </p>
+                <p><span class="icon">📞</span> Tel: <a href="tel:+8613410035683">(+86) 13410035683</a></p>
+                <p><span class="icon">✉️</span> Email: <a href="mailto:rongweichen@link.cuhk.edu.cn">rongweichen@link.cuhk.edu.cn</a></p>
+                <p>
+                    <span class="icon">📍</span>
+                    <span data-lang="en">Address: Shenzhen, Guangdong, China</span>
+                    <span data-lang="zh" style="display:none;">地址：中国广东深圳</span>
+                </p>
+                <p>
+                    <span class="icon">⏳</span>
+                    <span data-lang="en">Internship Availability: From March 2026 for 6 months</span>
+                    <span data-lang="zh" style="display:none;">实习时间：2026 年 3 月起，可连续实习 6 个月</span>
+                </p>
                 <div class="links">
-                    <a href="https://github.com/liaoyanqing666" target="_blank" class="button">🐱 GitHub</a>
-                    <a href="files/resume.pdf" target="_blank" class="button">📄 Resume</a>
-                    <a href="files/undergraduate transcript.pdf" target="_blank" class="button">📝 Transcript</a>
-                    <a href="files/undergraduate grade and ranking.pdf" target="_blank" class="button">🎓 GPA & Ranking Certificate</a>
+                    <a href="files/resume-cn.pdf" target="_blank" class="button">
+                        <span data-lang="en">📄 Chinese Resume</span>
+                        <span data-lang="zh" style="display:none;">📄 中文简历</span>
+                    </a>
+                    <a href="files/resume-en.pdf" target="_blank" class="button">
+                        <span data-lang="en">📄 English Resume</span>
+                        <span data-lang="zh" style="display:none;">📄 英文简历</span>
+                    </a>
+                    <a href="#experience" class="button">
+                        <span data-lang="en">💼 Experience</span>
+                        <span data-lang="zh" style="display:none;">💼 实习经历</span>
+                    </a>
+                    <a href="#projects" class="button">
+                        <span data-lang="en">💻 Projects</span>
+                        <span data-lang="zh" style="display:none;">💻 项目经历</span>
+                    </a>
                 </div>
             </div>
-            <div class="carousel-container">
-                <img src="images/photo2.jpg" class="carousel-image active" alt="Siyuan Li Photo 1">
-                <img src="images/photo4.png" class="carousel-image" alt="Siyuan Li Photo 3">
-                <img src="images/photo3.jpg" class="carousel-image" alt="Siyuan Li Photo 2">
-                <!-- <img src="images/photo1.jpg" class="carousel-image" alt="Siyuan Li Photo 4"> -->
-                <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-                <a class="next" onclick="changeSlide(1)">&#10095;</a>
+            <div class="summary-panel">
+                <img src="images/profile.jpg" alt="陈荣威证件照" class="profile-photo">
+                <h3>
+                    <span data-lang="en">Quick Profile</span>
+                    <span data-lang="zh" style="display:none;">个人概览</span>
+                </h3>
+                <ul data-lang="en">
+                    <li>Undergraduate at CUHK-Shenzhen</li>
+                    <li>Internship experience in OSL, KC Global, and EY</li>
+                    <li>Skilled in SQL, Python, Tableau, and DataWind</li>
+                    <li>Interested in product analytics, risk strategy, and data-driven decision making</li>
+                </ul>
+                <ul data-lang="zh" style="display:none;">
+                    <li>香港中文大学（深圳）量化专业本科在读</li>
+                    <li>拥有 OSL Group、KC Global、安永等实习经历</li>
+                    <li>熟练使用 SQL、Python、Quick BI、DataWind、Tableau 等工具</li>
+                    <li>关注数据分析、风险控制、产品与策略相关岗位</li>
+                </ul>
             </div>
         </div>
     </header>
 
     <script>
-        let currentSlide = 0;
-        function changeSlide(direction) {
-            const slides = document.querySelectorAll('.carousel-image');
-            slides[currentSlide].classList.remove('active');
-            currentSlide += direction;
-            if (currentSlide >= slides.length) currentSlide = 0;
-            if (currentSlide < 0) currentSlide = slides.length - 1;
-            slides[currentSlide].classList.add('active');
-        }
-
         document.getElementById('theme-toggle').addEventListener('click', () => {
             document.documentElement.classList.toggle('dark-theme');
             const isDark = document.documentElement.classList.contains('dark-theme');
             document.getElementById('theme-toggle').textContent = isDark ? '🌞' : '🌛';
         });
+
+        const langButtons = {
+            en: document.getElementById('lang-en'),
+            zh: document.getElementById('lang-zh')
+        };
+
+        function setLanguage(lang) {
+            document.querySelectorAll('[data-lang]').forEach((node) => {
+                node.style.display = node.getAttribute('data-lang') === lang ? '' : 'none';
+            });
+
+            Object.entries(langButtons).forEach(([key, button]) => {
+                button.classList.toggle('active', key === lang);
+            });
+
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        }
+
+        langButtons.en.addEventListener('click', () => setLanguage('en'));
+        langButtons.zh.addEventListener('click', () => setLanguage('zh'));
     </script>
-    
+
     <section class="intro">
         <div class="container">
             <p>
-                I am Siyuan Li, a Ph.D. student in Computer Science at the <a href="https://uga.edu" target="_blank">University of Georgia</a>, under the supervision of the renowned professor <a href="https://scholar.google.com/citations?user=92RPXm0AAAAJ" target="_blank">Tianming Liu</a>, a distinguished research professor in medical AI and LLMs. I earned my Bachelor's degree in Artificial Intelligence from <a href="https://www.shu.edu.cn/" target="_blank">Shanghai University</a>, graduating first in my major. I prefer to explore, learn, and create things from scratch, rather than relying solely on pre-made solutions. For instance, I built this webpage myself (with an Easter egg 🐣), and it has received <a href="https://github.com/liaoyanqing666/liaoyanqing666.github.io" target="_blank"><img src="https://img.shields.io/github/stars/liaoyanqing666/liaoyanqing666.github.io" alt="Stars"/></a> <a href="https://github.com/liaoyanqing666/liaoyanqing666.github.io" target="_blank"><img src="https://img.shields.io/github/forks/liaoyanqing666/liaoyanqing666.github.io" alt="Forks"/></a>.
+                I am Chen Rongwei, an undergraduate student at <a href="https://www.cuhk.edu.cn/en" target="_blank">The Chinese University of Hong Kong, Shenzhen</a>. My background combines data analysis, risk control, consulting, and quantitative research. I am especially interested in turning ambiguous business questions into clear metrics, reliable data pipelines, and usable dashboards or analytical frameworks.
+            </p>
+            <p data-lang="zh" style="display:none;">
+                我就读于<a href="https://www.cuhk.edu.cn/" target="_blank">香港中文大学（深圳）</a>，经历覆盖数据分析、风险控制、咨询与量化研究，关注如何将复杂业务问题转化为清晰的指标体系、稳定的数据流程和可落地的分析工具。
             </p>
             <p>
-                As an intern at the <a href="https://en.westlake.edu.cn/" target="_blank">AI for Scientific Simulation and Discovery Lab</a> at <a href="https://ai4s.lab.westlake.edu.cn/" target="_blank">Westlake University</a>, I led an exploratory project on AI-driven physical law discovery under the mentorship of <a href="https://tailin.org/" target="_blank">Prof. Tailin Wu</a>. Within my university, I have participated in research projects under <a href="https://yuhang.netlify.app/" target="_blank">Prof. Hang Yu</a> and in the Brain-like Computing Center led by <a href="https://www.dlcloud.info/" target="_blank">Prof. Huiran Zhang</a>. For my undergraduate thesis, I designed and implemented a medical question-answering system incorporating multimodal RAG components, and fine-tuned multimodal models with medical data. Previously, under the guidance of <a href="https://cswhjiang.github.io/" target="_blank">Dr. Wenhao Jiang</a>, I worked on enhancing the complex reasoning capabilities of medical large language models.
+                During internships at <b>OSL Group</b>, <b>KC Global</b>, and <b>EY</b>, I worked on user funnel analysis, referral quality diagnosis, market liquidity evaluation, risk limit modeling, process optimization, and reporting. Compared with purely academic resume pages, I want this website to present my experience in a way that highlights business understanding, analytical execution, and product-minded delivery.
+            </p>
+            <p data-lang="zh" style="display:none;">
+                在 OSL Group、KC Global 和安永的实习中，我参与了用户漏斗分析、用户质量诊断、市场流动性评估、风险限额建模、流程优化和报告输出等工作，希望更准确地呈现我的业务理解、分析执行力和持续交付能力。
             </p>
             <p>
-                My research interests are primarily focused on model architecture and algorithmic innovation. Currently, my specific areas of interest are (Multimodal) LLMs and AI for Science, with a particular focus on models' deep reasoning capabilities. I am dedicated to acquiring knowledge from diverse subfields to expand my expertise and exploring the possibilities of bridging existing knowledge with new domains.
+                My long-term goal is to grow toward roles in product analytics, business analysis, and risk strategy, where data is not only used for explanation, but also for building decision systems and improving products continuously.
+            </p>
+            <p data-lang="zh" style="display:none;">
+                我的长期目标是往产品分析、商业分析和风险策略方向发展，让数据不只是用于解释问题，也能真正服务于决策和产品优化。
             </p>
         </div>
     </section>
 
     <main>
         <div class="container">
-            <section>
-                <h2>🎓 Education</h2>
+            <section id="education">
+                <h2>
+                    <span data-lang="en">🎓 Education</span>
+                    <span data-lang="zh" style="display:none;">🎓 教育背景</span>
+                </h2>
                 <div class="education-item">
                     <div class="education-header">
                         <div class="details">
-                            <h3>University of Georgia (UGA)</h3>
-                            <p>Ph.D. Student in Computer Science (<a href="https://computing.uga.edu/">School of Computing</a>)</p>
-                            <p class="date">08/2025 (Deferred to 01/2026) - 06/2030</p>
+                            <h3>
+                                <span data-lang="en">The Chinese University of Hong Kong, Shenzhen</span>
+                                <span data-lang="zh" style="display:none;">香港中文大学（深圳）</span>
+                            </h3>
+                            <p data-lang="en">Bachelor's Degree, Quantitative / Data-Science Related Track</p>
+                            <p data-lang="zh" style="display:none;">量化专业</p>
+                            <p class="date">09/2023 - 06/2027</p>
                         </div>
                         <div class="education-info">
-                            <p><strong>Supervisor:</strong> <a href="https://scholar.google.com/citations?user=92RPXm0AAAAJ" target="_blank">Prof. Tianming Liu</a></p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="education-item">
-                    <div class="education-header">
-                        <div class="details">
-                            <h3>Shanghai University (SHU)</h3>
-                            <p>B.E. in Artificial Intelligence (<a href="https://cs.shu.edu.cn/">School of Computer Engineering and Science</a>)</p>
-                            <p class="date">09/2021 - 06/2025</p>
-                        </div>
-                        <div class="education-info">
-                            <p><strong>GPA:</strong> 3.81/4.0 (93.60/100)</p>
-                            <p><strong>Ranking:</strong> 1/52 (1/31 in class)</p>
+                            <p><strong>GPA:</strong> 3.64 / 4.0</p>
+                            <p data-lang="en"><strong>Ranking:</strong> Top 30% in School of Science and Engineering</p>
+                            <p data-lang="zh" style="display:none;"><strong>排名：</strong>理工学院前 30%</p>
                         </div>
                     </div>
                     <div class="education-introduction">
-                        <p><b>Key Courses</b>: Calculus (94), Linear Algebra (100), Object-Oriented Programming (94), Probability and Statistics (95), Data Structures (97), Pattern Recognition (90), Computer Vision (91), Operations and Optimization (88), Data Mining and Knowledge Processing (94), Mathematical Logic (95), Principles and Techniques of LLMs (95), Principles and Algorithms of AI (93)</p>
+                        <p data-lang="en"><b>Key Courses</b>: Ordinary Differential Equations, Linear Algebra, FinTech Practice, Fixed Income, Options and Futures, Optimization Theory, Time Series, Stochastic Process, Probability and Mathematical Statistics, Investment Analysis and Portfolio Management, Econometrics, Python Data Structures and Algorithms.</p>
+                        <p data-lang="zh" style="display:none;"><b>核心课程</b>：常微分（4.0）、线性代数（4.0）、金融科技实践（4.0）、固定收益（4.0）、期权期货（4.0）、最优化理论、微积分、时间序列、随机过程、概率论与数理统计、Python数据结构与算法、投资分析与管理、微观经济学、计量经济学。</p>
                     </div>
                 </div>
             </section>
 
-            <section>
-                <h2>🔬 Research Internship</h2>
-                <div class="experience-item">
-                    <div class="details-with-logo">
-                        <h3>
-                            <img src="images/GML.png" alt="Guangming Lab" class="logo">
-                            Research Intern at Guangming Laboratory
-                        </h3>
-                        <p>Medical Large Language Models with Complex Reasoning Capabilities</p>
-                        <p>Advisor: Dr. Wenhao Jiang</p>
-                        <p>Project Undisclosed</p>
-                        <p class="date">09/2025 - 01/2026</p>
-                    </div>
+            <section id="experience">
+                <h2>
+                    <span data-lang="en">💼 Internship Experience</span>
+                    <span data-lang="zh" style="display:none;">💼 实习经历</span>
+                </h2>
 
-                    <div class="content">
+                <div class="experience-item">
+                    <div class="details">
+                        <h3>
+                            <span data-lang="en">OSL Group</span>
+                            <span data-lang="zh" style="display:none;">OSL Group</span>
+                        </h3>
+                        <p data-lang="en">Data Analysis Intern</p>
+                        <p data-lang="zh" style="display:none;">数据分析实习生</p>
+                        <p class="date">12/2025 - 02/2026</p>
+                    </div>
+                    <div class="content" data-lang="en">
                         <ul>
-                            <li>Constructed a high-quality medical Instruction Tuning dataset by performing in-depth cleaning and structuring of large-scale private clinical records, and designing diverse QA templates to ensure comprehensive data coverage.</li>
-                            <li>Developed a fully automated Supervised Fine-Tuning (SFT) pipeline, streamlining the end-to-end workflow from heterogeneous data loading and dynamic prompt construction to efficient model training.</li>
-                            <li>Proposed an answer-guided self-distillation mechanism to generate Chain-of-Thought (CoT) reasoning based on correct answers. Incorporating these rationales into SFT guided the model to adopt optimal reasoning paths, significantly enhancing logical reasoning and accuracy in complex medical scenarios.</li>
-                            <li>Applied Reinforcement Learning for continuous policy optimization, further reinforcing the model's multi-step reasoning abilities and improving the accuracy of clinical decision-making.</li>
+                            <li>Built user behavior datasets with SQL and analyzed the conversion funnel from registration to VIP, segmented by site, channel, and user tier, to identify major drop-off points.</li>
+                            <li>Diagnosed referral-user quality by tracking post-reward asset changes and transaction paths, identifying a low-quality “reward-then-withdraw” pattern affecting about 95% of users.</li>
+                            <li>Constructed a liquidity metric framework by date, trading pair, and market maker to support weekly and monthly business reporting.</li>
+                            <li>Iterated market-maker liquidity dashboards in DataWind, adding metrics such as trading share, fees, balance, and new-pair depth to support drill-down analysis and anomaly detection.</li>
+                        </ul>
+                    </div>
+                    <div class="content" data-lang="zh" style="display:none;">
+                        <ul>
+                            <li>用户漏斗链路分析：使用 SQL 构建用户行为数据集（用户注册、KYC、资产、交易、VIP 标签），通过转化漏斗（注册→KYC→入金→交易→VIP），按站点、渠道及用户分层拆解转化率，定位关键流失节点。</li>
+                            <li>用户质量分析：通过分析奖励领取后资产变化与交易行为路径，识别“领取奖励即出金”的低质量用户模式，支持团队将激励规则由“注册导向”调整为“交易 / 资产门槛导向”。</li>
+                            <li>交易与流动性指标体系搭建：围绕平台流动性复盘需求，按照“日期 × 币对 × 做市商”等粒度拆解深度、价差等流动性表现，输出业务周报与月报。</li>
+                            <li>看板迭代交付闭环：联动运营及做市商对接同事，围绕多站点流动性运营场景，基于 DataWind 搭建并持续迭代做市商流动性看板，支持多维下钻及异常定位。</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="experience-item">
-                    <div class="details-with-logo">
+                    <div class="details">
                         <h3>
-                            <img src="images/Huawei.png" alt="Huawei" class="logo">
-                            AI Intern (NLP Focus) at Huawei
+                            <span data-lang="en">KC Global</span>
+                            <span data-lang="zh" style="display:none;">KC Global</span>
                         </h3>
-                        <p>Location: Huawei Lianqiu Lake R&D Center, Shanghai</p>
-                        <p>Department: Ascend Computing Inference Development</p>
-                        <p><a href="https://github.com/vllm-project/vllm-ascend">Project Website</a></p>
-                        <p class="date">12/2024 - 03/2025</p>
+                        <p data-lang="en">Risk Control Intern</p>
+                        <p data-lang="zh" style="display:none;">风控实习生</p>
+                        <p class="date">07/2025 - 10/2025</p>
                     </div>
-
-                    <div class="content">
+                    <div class="content" data-lang="en">
                         <ul>
-                            <li>Contributed to the vLLM open-source community by identifying a bug (<a href="https://github.com/vllm-project/vllm/issues/11978">Issue #11978</a>) and submitting a fix that was merged into the main branch (<a href="https://github.com/vllm-project/vllm/pull/11979">PR #11979</a>).</li>
-                            <li>Migrated vLLM to the Ascend NPU platform (<a href="https://github.com/vllm-project/vllm-ascend">vllm-ascend</a>), responsible for unit testing and operator adaptation.</li>
-                            <li>Adapted speculative decoding on vllm-ascend.</li>
+                            <li>Built a cross-exchange multi-source data pipeline using REST and WebSocket APIs to collect, clean, and align over 100k records for contract risk-limit modeling.</li>
+                            <li>Designed 8 core risk indicators and applied Cook's distance and log transformation to stabilize model structure and update platform risk-limit parameters.</li>
+                            <li>Created a full product mapping table against competitors to analyze differences in index constituent coverage, completeness of metrics, and calculation scope.</li>
+                            <li>Analyzed order-book and transaction data under volatile conditions to identify abnormal patterns such as manipulation or suspicious liquidity behavior, and summarized reusable warning rules and SOPs.</li>
+                        </ul>
+                    </div>
+                    <div class="content" data-lang="zh" style="display:none;">
+                        <ul>
+                            <li>构建合约风险限额模型：围绕平台合约产品风险定价与限额更新场景，独立搭建跨交易所多源接口数据管道，抓取、清洗并对齐超 10 万量级数据；设计 8 个核心风险指标，结合 Cook 距离异常识别与对数转换稳定相关结构，构建拟合模型并更新所内限额参数。</li>
+                            <li>指数成分与市场覆盖分析：围绕平台指数产品指标计算与市场覆盖评估场景，建立完整产品映射表并对齐主要竞对产品体系，分析平台与竞对在成分覆盖、指标完备度及产品口径上的差异。</li>
+                            <li>市场流动性与交易行为分析：围绕极端行情下的平台市场风险防御需求，基于订单簿与成交数据分析小体量产品的流动性特征与交易行为，识别洗盘、价格操纵等异常模式。</li>
+                            <li>联动数仓同事搭建衍生特征体系，包括盘口深度比、冲击成本及成交额异动分析等指标，沉淀可复用的风险预警规则与 SOP，支持异常行为监控与风险研判。</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="experience-item">
-                    <div class="details-with-logo">
+                    <div class="details">
                         <h3>
-                            <img src="images/SHU_BLCC.png" alt="SHU_BLCC" class="logo">
-                            SHU Brain-like Computing Center
+                            <span data-lang="en">Ernst &amp; Young (EY)</span>
+                            <span data-lang="zh" style="display:none;">安永</span>
                         </h3>
-                        <p>AI for Recognizing Preference</p>
-                        <p>Advisor: Prof. Huiran Zhang (Shanghai University)</p>
-                        <p>Project Undisclosed</p>
-                        <p class="date">04/2024 - 09/2024</p>
+                        <p data-lang="en">Consulting Intern</p>
+                        <p data-lang="zh" style="display:none;">企业咨询实习生</p>
+                        <p class="date">05/2025 - 06/2025</p>
                     </div>
-
-                    <div class="content">
+                    <div class="content" data-lang="en">
                         <ul>
-                            <li>Proposed a novel ERP composite formula for analyzing human preferences.</li>
-                            <li>Achieved effective classification of preferences using AI methods combined with the developed formula.</li>
-                            <li>Authored a paper as the first author, available on <a href="https://arxiv.org/abs/2505.19879">arXiv</a>.</li>
+                            <li>Participated in a digital-management consulting project for a state-owned enterprise, reviewing project information flows such as cost reporting, approval status, and progress feedback.</li>
+                            <li>Helped identify duplicated maintenance of fields, inconsistent naming rules, and non-unified approval definitions across departments.</li>
+                            <li>Researched data-middle-platform practices and supported proposals for restructuring information flow and approval processes.</li>
+                            <li>Summarized findings into PowerPoint reports and used Tableau to visualize key process nodes and issue distribution.</li>
                         </ul>
                     </div>
-                </div>
-
-                <div class="experience-item">
-                    <div class="details-with-logo">
-                        <h3>
-                            <img src="images/WestlakeU.png" alt="WestlakeU" class="logo">
-                            Research Intern at Westlake University
-                        </h3>
-                        <p>Rule Discovery in Physical Data/Video</p>
-                        <p>Advisor: Prof. Tailin Wu (Westlake University), Prof. Sebastian Musslick (Brown University)</p>
-                        <p>Project Undisclosed</p>
-                        <p class="date">07/2023 - 06/2024</p>
-                    </div>
-                    <div class="content">
+                    <div class="content" data-lang="zh" style="display:none;">
                         <ul>
-                            <li>Developed a transformer-based model and programmed experiments for symbolic regression tasks.</li>
-                            <li>Extended symbolic regression from mathematical expressions to the video domain by building a multimodal model.</li>
-                            <li>Explored the discovery of physical system patterns from videos to empower scientific discovery tasks.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="experience-item">
-                    <div class="details-with-logo">
-                        <h3>
-                            <img src="images/SHU.png" alt="Shanghai University" class="logo">
-                            Research at Shanghai University
-                        </h3>
-                        <p>Video Frame Interpolation with PVT</p>
-                        <p>Advisor: Prof. Hang Yu (Shanghai University)</p>
-                        <p><a href="https://github.com/liaoyanqing666/PVT_v2_video_frame_interpolation">Project Website</a></p>
-                        <p class="date">04/2023 - 06/2023</p>
-                    </div>
-                    <div class="content">
-                        <ul>
-                            <li>Proposed a novel encoder-decoder video frame interpolation model leveraging PVT v2 as the encoder and a UNet-like decoder with deconvolution and residual concatenation.</li>
-                            <li>Achieved an SSIM of 0.9879 on the Vimeo90K Dataset, surpassing state-of-the-art methods.</li>
+                            <li>某建筑国企现场项目实践：围绕 C-SYS+ 平台在项目经营管理侧的落地使用情况，参与对项目基础信息、成本填报、进度反馈和审批状态等核心数据链路的梳理，协助识别字段重复维护、命名规则不一致、审批状态定义不统一等问题。</li>
+                            <li>支持团队从“统一字段标准”和“压缩重复填报环节”两个方向提出优化建议。</li>
+                            <li>数据中台与审批管理流程重构：围绕客户中台体系薄弱的问题，研究行业中台架构与数据治理实践，结合客户现状提出信息流与审批流程优化建议。</li>
+                            <li>将 case 梳理与分析结论沉淀为 PowerPoint 报告，并通过 Tableau 展示关键流程节点与问题分布。</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <section>
-                <h2>💻 Projects (Selected by Learning Path)</h2>
+            <section id="projects">
+                <h2>
+                    <span data-lang="en">💻 Projects</span>
+                    <span data-lang="zh" style="display:none;">💻 项目经历</span>
+                </h2>
+
                 <div class="project-item">
                     <div class="details">
-                        <h3>Fine-Tuning of Multimodal Medical Large Models Integrating RAG Mechanisms</h3>
-                        <p>Undergraduate Thesis</p>
-                        <p class="date">05/2025</p>
+                        <h3>
+                            <span data-lang="en">Smart Weather Experience Insurance Platform</span>
+                            <span data-lang="zh" style="display:none;">气象触发型旅游保障平台</span>
+                        </h3>
+                        <p data-lang="en">B2B2C Parametric Travel Protection Product</p>
+                        <p data-lang="zh" style="display:none;">B2B2C 气象触发型旅游保障平台</p>
+                        <p class="date">09/2025 - 12/2025</p>
                     </div>
-                    <div class="content">
+                    <div class="content" data-lang="en">
                         <ul>
-                            <li>Designed and implemented a medical content generation system combining Retrieval-Augmented Generation (RAG) and Multimodal Large Language Model (MLLM) fine-tuning.</li>
-                            <li>Developed a multimodal RAG framework supporting joint image-text input, featuring multiple retrieval paradigms such as joint embedding, label-guided retrieval, and image-text pair binding.</li>
-                            <li>Fine-tuned the Qwen2.5-VL model in two stages using Chinese medical QA and image-text datasets, yielding the Qwen2.5-VL-Med model with domain-specific reasoning capabilities.</li>
-                            <li>Built a modular web-based interactive system supporting local/cloud API deployment, multimodal input, streaming response, and history tracking.</li>
+                            <li>Designed a weather-triggered travel protection product for scenic spots and OTA embedding scenarios, with a closed-loop logic of “real-time monitoring + auto trigger + hybrid compensation”.</li>
+                            <li>Built a micro-climate risk identification framework combining CNN-based image recognition, IoT sensors, satellite weather data, and logistic-regression logic.</li>
+                            <li>Designed a dual-track compensation mechanism of cash payout and replacement experience vouchers to improve user experience while controlling payout cost.</li>
+                        </ul>
+                    </div>
+                    <div class="content" data-lang="zh" style="display:none;">
+                        <ul>
+                            <li>面向景区与 OTA 嵌入式销售场景，设计 B2B2C 参数型旅游保障产品，围绕天气导致的“体验受损”问题，构建“实时监测 + 自动触发 + 混合赔付”的产品闭环。</li>
+                            <li>搭建微气候风险识别与触发判断框架，融合卷积神经网络图像识别、物联网传感器、卫星气象数据与逻辑回归方法，对能见度、降雨、云层等条件进行判别。</li>
+                            <li>设计用户侧保障方案推荐与赔付分流机制，提出“现金赔付 + 替代体验券”双轨方案，在控制赔付成本的同时提升用户体验修复能力。</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="project-item">
                     <div class="details">
-                        <h3>Cross-Modal Pretrained Model Alignment</h3>
-                        <p><a href="https://github.com/liaoyanqing666/Pretrained_Model_Alignment">Project Website</a></p>
-                        <p class="date">07/2024</p>
+                        <h3>
+                            <span data-lang="en">A-share Market Investment Analysis and Portfolio Management</span>
+                            <span data-lang="zh" style="display:none;">A股市场投资分析与组合管理</span>
+                        </h3>
+                        <p data-lang="en">Factor Analysis Model</p>
+                        <p data-lang="zh" style="display:none;">因子分析模型</p>
+                        <p class="date">03/2025 - 05/2025</p>
                     </div>
-                    <div class="content">
+                    <div class="content" data-lang="en">
                         <ul>
-                            <li>Proposed and implemented a method to quickly align pre-trained models from different modalities.</li>
-                            <li>Designed a Siamese neural network similarity module to align pretrained models with varying embedding dimensions.</li>
-                            <li>Achieved rapid model alignment between text and image modalities with minimal training on a standard image classification dataset, bypassing the need for large "image-description" datasets (e.g., CLIP).</li>
-                            <li>Experimentally demonstrated the project's ability to align quickly with minimal GPU requirements while maintaining satisfactory performance.</li>
+                            <li>Conducted cross-model validation with 10 years of CSMAR data to examine the weak applicability of CAPM in the A-share market.</li>
+                            <li>Constructed factor-based portfolios using variables such as PB ratio and performed cross-sectional regression in STATA.</li>
+                            <li>Visualized strategy performance with Matplotlib and achieved a stable return of 5.3% through monthly rebalancing.</li>
                         </ul>
                     </div>
-                </div>
-                
-                <div class="project-item">
-                    <div class="details">
-                        <h3>Reproduction and Experimentation of TextCNN</h3>
-                        <p><a href="https://github.com/liaoyanqing666/TextCNN-Chinese-text-data-mining-">Project Website</a></p>
-                        <p class="date">03/2023</p>
-                    </div>
-                    <div class="content">
+                    <div class="content" data-lang="zh" style="display:none;">
                         <ul>
-                            <li>Reproduced and experimented with the TextCNN model.</li>
-                            <li>Performed tokenization and encoding of sentence content, followed by padding or truncating sentence lengths.</li>
-                            <li>Implemented word embedding and utilized multiple convolutional kernels of varying sizes for feature extraction, pooling, and final classification through fully connected layers.</li>
+                            <li>基于 A 股数据做交叉模型验证：分析 CSMAR 金融数据库 10 年数据集，交叉验证 CAPM 模型在 A 股市场上的弱适用性，完成风险系数与股票投资组合回报关系的研报复现。</li>
+                            <li>分析 CSMAR 金融数据库中 A 股数据，验证 CAPM 模型在 A 股市场的适用性，并基于因子回测模型构建投资组合，采用 STATA 语言进行横截面回归分析。</li>
+                            <li>得出基于市净率等因子的投资策略，并实现 5.3% 的稳健收益率，同时使用 Matplotlib 进行数据可视化展示。</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="project-item">
                     <div class="details">
-                        <h3>CNN-LSTM Based Video Classification</h3>
-                        <p><a href="https://github.com/liaoyanqing666/CNN_LSTM_video_classification">Project Website</a></p>
-                        <p class="date">02/2023</p>
+                        <h3>
+                            <span data-lang="en">Portfolio Optimization Based on Optimization Algorithms</span>
+                            <span data-lang="zh" style="display:none;">基于优化算法的资产配置</span>
+                        </h3>
+                        <p data-lang="en">MATLAB / Python Quantitative Practice</p>
+                        <p data-lang="zh" style="display:none;">优化算法实践项目</p>
+                        <p class="date">09/2024 - 12/2024</p>
                     </div>
-                    <div class="content">
+                    <div class="content" data-lang="en">
                         <ul>
-                            <li>Developed a network model based on CNN for video frame feature extraction and LSTM for sequential frame feature computation.</li>
-                            <li>Compared the classification performance of KNN and ANN after freezing the feature extraction model parameters.</li>
-                            <li>Achieved 92% accuracy on a public dataset, comparable to results from another study using a non-public dataset.</li>
+                            <li>Applied CVX, Gurobi, and CVXPY to portfolio optimization using linear, quadratic, and nonlinear programming methods.</li>
+                            <li>Analyzed asset-weight allocation under different risk constraints through Newton Method, Gradient Descent, and Gradient Projection.</li>
+                            <li>Solved mixed-integer optimization problems with Branch and Bound to balance diversification, risk control, and return potential.</li>
                         </ul>
                     </div>
-                </div>
-
-                <div class="project-item">
-                    <div class="details">
-                        <h3>Handwriting Recognition System Based on Siamese Neural Networks</h3>
-                        <p><a href="https://github.com/liaoyanqing666/siamese_neural_network_OfHSV">Project Website</a></p>
-                        <p class="date">11/2022</p>
-                    </div>
-                    <div class="content">
+                    <div class="content" data-lang="zh" style="display:none;">
                         <ul>
-                            <li>Independently designed and coded a system utilizing VGG16 for signature feature extraction.</li>
-                            <li>Achieved 100% accuracy on the CEDAR dataset using Siamese neural networks for classification.</li>
-                            <li>Developed frontend-backend interaction logic enabling the utilization of training results on web platforms.</li>
+                            <li>使用 MATLAB（CVX、Gurobi）和 Python（CVXPY）进行资产组合优化实践，尝试通过线性规划和二次规划实现风险最小化与收益最大化。</li>
+                            <li>通过 Newton Method、Gradient Descent 与 Gradient Projection 分析不同风险约束下的资产权重配置及其对组合表现的影响。</li>
+                            <li>利用 Branch and Bound 处理混合整数优化问题，通过设置严格投资比例约束实现投资分散化，并平衡风险与收益。</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
             <section>
-                <h2>🏆 Awards</h2>
-                <ul class="awards-list">
-                    <li><a href="https://icpc.global/" target="_blank">ICPC (International Collegiate Programming Contest) Asia Regional Contest (Hefei)</a> Bronze Medal 🥉 <span class="date">11/2023</span></li>
-                    <li><a href="https://icpc.global/" target="_blank">ICPC (International Collegiate Programming Contest) Asia Regional Contest (Nanjing)</a> Bronze Medal 🥉 <span class="date">11/2022</span></li>
-                    <li><a href="http://www.asc-events.org/" target="_blank">ASC Student Supercomputer Challenge</a> National Second Prize 🥈 <span class="date">02/2024</span></li>
-                    <li><a href="https://dasai.lanqiao.cn/" target="_blank">Lanqiao Cup C/C++ Programming Contest (National)</a> Third Prize 🥉 <span class="date">06/2023</span></li>
-                    <li><a href="https://dasai.lanqiao.cn/" target="_blank">Lanqiao Cup C/C++ Programming Contest (Shanghai Division)</a> First Prize 🥇 <span class="date">04/2023</span></li>
-                    <li><a href="https://ccpc.io/" target="_blank">CCPC (China Collegiate Programming Contest) Shanghai Programming Contest</a> Silver Medal 🥈 <span class="date">10/2022</span></li>
+                <h2>
+                    <span data-lang="en">🏆 Highlights</span>
+                    <span data-lang="zh" style="display:none;">🏆 核心亮点</span>
+                </h2>
+                <ul class="awards-list" data-lang="en">
+                    <li>Built reusable user-funnel and referral-quality analysis frameworks directly supporting business-rule adjustment.</li>
+                    <li>Delivered liquidity dashboards and indicator systems for market-maker performance review and anomaly diagnosis.</li>
+                    <li>Constructed a contract risk-limit modeling pipeline and updated parameters based on quantitative risk indicators.</li>
+                    <li>Strong coursework performance in quantitative, financial, and data-analysis related subjects, including multiple 4.0-level courses.</li>
+                </ul>
+                <ul class="awards-list" data-lang="zh" style="display:none;">
+                    <li>搭建用户漏斗链路分析与用户质量分析框架，直接支持激励规则由“注册导向”调整为“交易 / 资产门槛导向”。</li>
+                    <li>交付做市商流动性看板和交易、流动性指标体系，支持业务周报、月报与异常定位。</li>
+                    <li>构建合约风险限额模型数据管道和核心风险指标体系，为平台限额更新提供量化依据。</li>
+                    <li>量化、数据分析与产品相关课程成绩突出，常微分、线性代数、金融科技实践、固定收益、期权期货等课程取得 4.0 表现。</li>
+                </ul>
+            </section>
+
+            <section id="skills">
+                <h2>
+                    <span data-lang="en">🛠️ Skills</span>
+                    <span data-lang="zh" style="display:none;">🛠️ 技能特长</span>
+                </h2>
+                <ul class="skills-list" data-lang="en">
+                    <li><strong>Programming & Analysis:</strong> Python, SQL, R, STATA, MATLAB</li>
+                    <li><strong>Visualization & BI:</strong> Quick BI, DataWind, Tableau, Excel, Think-cell</li>
+                    <li><strong>Office & Communication:</strong> MS Office, PowerPoint, business reporting materials, basic Photoshop</li>
+                    <li><strong>Languages & AI Tools:</strong> Chinese (Native), English (GRE 323), ChatGPT, Claude, Cursor, NanoBanana, OpenClaw</li>
+                </ul>
+                <ul class="skills-list" data-lang="zh" style="display:none;">
+                    <li><strong>编程技能：</strong>Python（Pandas、Matplotlib、Numpy）、SQL、R、STATA、MATLAB</li>
+                    <li><strong>数据处理与可视化：</strong>Quick BI、DataWind、Tableau、MS Office、Think-cell、Excel</li>
+                    <li><strong>语言能力：</strong>中文（母语）、英语（GRE：323）</li>
+                    <li><strong>AI 工具：</strong>熟练使用 ChatGPT、Claude、Cursor、NanoBanana、OpenClaw 提效</li>
                 </ul>
             </section>
 
             <section>
-                <h2>📚 Papers</h2>
-                <div class="papers-item">
-                    <div class="details">
-                        <h3>The Study of Human Preference Based on Integrated Analysis of N1 and LPP Components</h3>
-                        <p><a href="https://arxiv.org/abs/2505.19879">Paper Link</a> (arXiv:2505.19879)</p>
-                    </div>
-                    <div class="content">
-                        <ul>
-                            <li>Authors: Siyuan Li, Xiangze Meng, Yijian Yang, Yiwen Xu, Yunfei Wang, Chenghu Qiu, Hanyi Jiang, Pin Wu, Shengbo Chen, Xiao Wei, Hao Wang, Lan Ni, Huiran Zhang.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="papers-item">
-                    <div class="details">
-                        <h3>Research advances in offline handwritten signature verification</h3>
-                        <p><a href="https://www.ewadirect.com/proceedings/ace/article/view/4365">Paper Link</a>. Applied and Computational Engineering, 6(1), 1244-1252. DOI: 10.54254/2755-2721/6/20230653.</p>
-                    </div>
-                    <div class="content">
-                        <ul>
-                            <li>Co-authors: Yuhang Guo, Siyuan Li (Co-first author), Jinxuan Wu</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h2>🛠️ Skills</h2>
-                <ul class="skills-list">
-                    <li><strong>Programming Languages:</strong> Python (Advanced), C++ (Proficient), HTML (Proficient), MATLAB (Familiar), CSS (Familiar), JavaScript (Familiar)</li>
-                    <li><strong>Tools:</strong> Git/Github, Microsoft Word, LaTeX (Overleaf), Markdown, VS Code Remote SSH</li>
-                    <li><strong>AI-related Skills:</strong> PyTorch (Advanced), Transformers (Proficient), vLLM (Proficient), LLMs (Concept & Application)</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>🤝 Extracurricular & Volunteer Activities</h2>
+                <h2>
+                    <span data-lang="en">🤝 Extracurricular Activities</span>
+                    <span data-lang="zh" style="display:none;">🤝 校园活动</span>
+                </h2>
                 <div class="activity-item">
                     <div class="details">
-                        <h3>New Media Center, School of Computer Engineering and Science</h3>
-                        <p>Chairman</p>
-                        <p class="date">01/2022 - 01/2023</p>
+                        <h3>
+                            <span data-lang="en">Financial Engineering Society, CUHK-Shenzhen</span>
+                            <span data-lang="zh" style="display:none;">香港中文大学（深圳）金融工程协会</span>
+                        </h3>
+                        <p data-lang="en">Director of Activities Department</p>
+                        <p data-lang="zh" style="display:none;">香港中文大学（深圳）金融工程协会活动部负责人</p>
+                        <p class="date">08/2024 - Present</p>
                     </div>
-                    <div class="content">
+                    <div class="content" data-lang="en">
                         <ul>
-                            <li>Managed content publication on the School's official WeChat account and coordinated daily operations.</li>
-                            <li>Organized and managed recruitment presentations, student representative meetings, and other related affairs.</li>
+                            <li>Organized and coordinated multiple activities to improve team collaboration and learning effectiveness.</li>
+                            <li>Assigned responsibilities across members and helped improve execution efficiency within the department.</li>
+                            <li>Took responsibility for drafting planning materials for lectures and events.</li>
                         </ul>
                     </div>
-                </div>
-
-                <div class="activity-item">
-                    <div class="details">
-                        <h3>ByteDance</h3>
-                        <p>Campus Ambassador</p>
-                        <p class="date">03/2022 - 06/2022</p>
-                    </div>
-                    <div class="content">
+                    <div class="content" data-lang="zh" style="display:none;">
                         <ul>
-                            <li>Assisted in promoting spring recruitment and summer internships.</li>
-                            <li>Distributed promotional materials and internal referral codes.</li>
+                            <li>组织和协调多场活动，提升团队协作与学习效果。</li>
+                            <li>负责成员分工与任务安排，提升部门执行效率。</li>
+                            <li>承担多场讲座和活动策划文案的撰写工作。</li>
                         </ul>
                     </div>
-                </div>
-                <div class="activity-item">
-                    <b>Volunteer Hours: 100h+ ⏳</b>
                 </div>
             </section>
         </div>
@@ -379,13 +416,10 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Siyuan Li. All rights reserved. Original content available in the <a href="https://github.com/liaoyanqing666/liaoyanqing666.github.io" target="_blank">website repository</a>.</p>
-            <p>Check out a game I wrote: <a href="game.html">Click the Ball Game 🎮</a>.</p>
+            <p>&copy; 2026 Chen Rongwei. All rights reserved.</p>
+            <p data-lang="en">This website is adapted from a static personal CV template and updated with my own content.</p>
+            <p data-lang="zh" style="display:none;">本网站基于静态个人简历模板改写，并已替换为我自己的内容。</p>
         </div>
     </footer>
-
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="track-visitors.js"></script>
 </body>
 </html>

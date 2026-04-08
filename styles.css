@@ -32,24 +32,20 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: 400;
     line-height: 1.7;
     background-color: var(--background);
     color: var(--text-primary);
-    font-size: 18px;
-    transition: background-color var(--transition);
+    font-size: 20px;
+    transition: background-color var(--transition), color var(--transition);
 }
 
 header {
     background-color: var(--surface);
     padding: 15px 0;
     border-bottom: 1px solid var(--border);
-    margin-bottom: 0px;
-}
-
-img {
-    vertical-align: middle;
+    margin-bottom: 0;
 }
 
 a {
@@ -70,7 +66,8 @@ a:hover {
 .header-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    gap: 28px;
 }
 
 section {
@@ -98,28 +95,51 @@ section {
     flex: 1;
 }
 
+.language-switcher {
+    display: inline-flex;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.lang-button {
+    border: 1px solid var(--border);
+    background-color: transparent;
+    color: var(--text-secondary);
+    padding: 4px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    transition: all var(--transition);
+}
+
+.lang-button.active {
+    background-color: var(--primary);
+    color: var(--surface);
+    border-color: var(--primary);
+}
+
 .profile-info h1 {
-    font-size: 1.9rem;
+    font-size: 2.25rem;
     font-weight: 700;
     margin-bottom: 10px;
-    font-family: 'Merriweather', serif;
+    font-family: 'Libre Baskerville', serif;
     color: var(--primary);
 }
 
 .profile-info .chinese-name {
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.65rem;
     color: var(--secondary);
 }
 
 .profile-info .subtitle {
-    font-size: 0.95rem;
+    font-size: 1.08rem;
     margin-bottom: 14px;
     color: var(--text-primary);
 }
 
 .profile-info p {
-    font-size: 0.85rem;
+    font-size: 1rem;
     margin-bottom: 8px;
     color: var(--text-primary);
 }
@@ -127,16 +147,6 @@ section {
 .profile-info .icon {
     margin-right: 5px;
     color: var(--text-secondary);
-}
-
-.profile-info a:not(.button) {
-    color: var(--link);
-    text-decoration: none;
-    transition: color var(--transition);
-}
-
-.profile-info a:not(.button):hover {
-    color: var(--link-hover);
 }
 
 .links {
@@ -150,68 +160,45 @@ section {
 
 .button {
     display: inline-block;
-    padding: 6px 10px;
+    padding: 8px 12px;
     background-color: var(--primary);
     color: var(--surface);
     border-radius: 5px;
     text-decoration: none;
     margin-top: 7px;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     transition: background-color var(--transition);
 }
 
 .button:hover {
     background-color: var(--link-hover);
-}
-
-.carousel-container {
-    width: 20%;
-    position: relative;
-    margin: 0 auto;
-    overflow: hidden;
-    border-radius: 5px;
-    border: 1px solid var(--border);
-}
-
-.carousel-image {
-    display: none;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.carousel-image.active {
-    display: block;
-}
-
-.prev,
-.next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    color: var(--text-primary);
-    border: none;
-    user-select: none;
-    border-radius: 50%;
-    transition: all var(--transition);
-}
-
-.prev {
-    left: 8px;
-}
-
-.next {
-    right: 8px;
-}
-
-.prev:hover,
-.next:hover {
-    background-color: var(--link-hover);
     color: var(--surface);
+}
+
+.summary-panel {
+    width: 28%;
+    min-width: 240px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    background-color: var(--emphasis);
+}
+
+.summary-panel h3 {
+    margin-bottom: 10px;
+    font-size: 1.15rem;
+    color: var(--primary);
+    font-family: 'Libre Baskerville', serif;
+}
+
+.summary-panel ul {
+    margin-top: 0;
+    padding-left: 20px;
+}
+
+.summary-panel li {
+    font-size: 0.98rem;
+    margin-bottom: 8px;
 }
 
 .intro {
@@ -223,7 +210,7 @@ section {
 }
 
 .intro p {
-    font-size: 0.9rem;
+    font-size: 1.02rem;
     margin-bottom: 20px;
 }
 
@@ -232,7 +219,7 @@ section {
 }
 
 main h2 {
-    font-size: 1.4rem;
+    font-size: 1.7rem;
     margin-top: 70px;
     margin-bottom: 30px;
     border-bottom: 1px solid var(--border);
@@ -245,7 +232,7 @@ main h2:first-of-type {
 }
 
 .date {
-    font-size: 0.75rem;
+    font-size: 0.88rem;
     font-style: italic;
     color: var(--text-secondary);
     display: block;
@@ -256,10 +243,10 @@ main h2:first-of-type {
     justify-content: space-between;
     align-items: flex-start;
     gap: 20px;
-    font-size: 0.8rem;
+    font-size: 0.96rem;
 }
 
-.education-item{
+.education-item {
     margin-bottom: 25px;
 }
 
@@ -268,7 +255,7 @@ main h2:first-of-type {
 }
 
 .education-introduction p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     line-height: 1.6;
 }
 
@@ -284,7 +271,7 @@ main h2:first-of-type {
     padding: 20px;
     border-left: 4px solid var(--primary);
     border-radius: 5px;
-    font-size: 0.8rem;
+    font-size: 0.96rem;
 }
 
 .experience-item .date,
@@ -294,38 +281,21 @@ main h2:first-of-type {
     margin-top: 5px;
 }
 
-.details,
-.details-with-logo {
+.details {
     margin-top: 10px;
     flex: 1;
-    margin-left: 0px;
 }
 
-.details h3,
-.details-with-logo h3 {
-    font-size: 1.15rem;
+.details h3 {
+    font-size: 1.3rem;
     font-weight: 700;
     color: var(--text-primary);
-    display: flex;
-    align-items: flex-start;
     margin-bottom: 5px;
 }
 
-.details p,
-.details-with-logo p {
-    font-size: 0.95rem;
+.details p {
+    font-size: 1rem;
     color: var(--text-secondary);
-}
-
-.logo {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-    margin-top: 5px;
-}
-
-.details-with-logo p {
-    margin-left: 50px;
 }
 
 .content {
@@ -342,19 +312,11 @@ main h2:first-of-type {
     padding: 0;
 }
 
-.awards-list li {
-    position: relative;
-    padding-right: 110px;
+.awards-list li,
+.skills-list li {
     margin-bottom: 12px;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--text-primary);
-}
-
-.awards-list .date {
-    position: absolute;
-    right: 0;
-    top: 0;
-    font-size: 0.9rem;
 }
 
 ul {
@@ -365,7 +327,7 @@ ul {
 
 ul li {
     margin-bottom: 10px;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--text-primary);
 }
 
@@ -375,17 +337,8 @@ footer {
     padding: 20px 0;
     border-top: 1px solid var(--border);
     margin-top: 60px;
-    font-size: 0.75rem;
+    font-size: 0.88rem;
     color: var(--text-secondary);
-}
-
-footer a {
-    color: var(--link);
-    text-decoration: none;
-}
-
-footer a:hover {
-    color: var(--link-hover);
 }
 
 footer p {
@@ -398,76 +351,41 @@ footer p {
         padding: 10px;
     }
 
-    header {
-        padding: 10px 0;
-        margin-bottom: 0;
-    }
-
-    .profile-info p {
-        font-size: 0.85rem;
-    }
-
-    .profile-info h1 {
-        font-size: 1.5rem;
-        text-align: center;
-    }
-
     .header-container {
         flex-direction: column;
         align-items: center;
         text-align: center;
     }
 
-    .carousel-container {
-        width: 30%;
-        height: auto;
-        margin-top: 15px;
-        position: relative;
+    .summary-panel {
+        width: 100%;
+        min-width: auto;
     }
 
-    .carousel-image {
-        height: auto;
-    }
-
-    .prev,
-    .next {
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    main h2 {
-        font-size: 1.2rem;
+    .profile-info h1 {
+        font-size: 1.85rem;
+        text-align: center;
     }
 
     .details,
-    .education-introduction,
-    .details-with-logo {
+    .education-introduction {
         margin-left: 20px;
     }
 
-    .details h3,
-    .details-with-logo h3 {
-        font-size: 1rem;
+    .details h3 {
+        font-size: 1.15rem;
         margin-bottom: 10px;
     }
 
-    .details p,
-    .details-with-logo p {
-        font-size: 0.9rem;
-    }
-
-    .details-with-logo p {
-        margin-left: 0px;
-    }
-
-    .logo {
-        margin-top: 0px;
+    .details p {
+        font-size: 0.98rem;
     }
 
     .education-item,
     .experience-item,
     .project-item,
-    .activity-item {
+    .activity-item,
+    .education-item .education-header {
         flex-direction: column;
         gap: 10px;
     }
