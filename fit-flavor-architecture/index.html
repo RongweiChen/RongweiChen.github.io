@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fit-Flavor OS | 架构深化版</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --bg: #f5f7f4;
+  --panel: #ffffff;
+  --line: #e5e7eb;
+  --text: #142218;
+  --muted: #667085;
+  --brand: #6ea64e;
+  --brand-dark: #4d7d35;
+  --brand-soft: #edf7e9;
+  --warn: #ef8f35;
+  --danger: #d95d39;
+  --shadow: 0 18px 40px rgba(20, 34, 24, 0.08);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+.hidden { display: none !important; }
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+.row { display: flex; align-items: center; }
+.gap-sm { gap: 10px; }
+.flex-1 { flex: 1; }
+.wrap { flex-wrap: wrap; gap: 20px; }
+
+.auth-overlay {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  background:
+    radial-gradient(circle at top right, rgba(110,166,78,0.18), transparent 28%),
+    linear-gradient(180deg, #f9fbf8, #eef3eb);
+}
+
+.auth-card {
+  width: min(720px, 100%);
+  background: rgba(255,255,255,0.86);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 28px;
+  padding: 40px;
+  box-shadow: var(--shadow);
+}
+
+.brand-mark, .logo {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--brand-dark);
+  letter-spacing: -0.04em;
+}
+
+.brand-mark.small-brand { font-size: 20px; }
+.eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--brand-dark);
+  margin-bottom: 8px;
+}
+
+.auth-step { display: none; margin-top: 18px; }
+.auth-step.active { display: block; }
+.auth-step h1 { font-size: clamp(28px, 4vw, 42px); line-height: 1.08; margin: 0 0 12px; letter-spacing: -0.04em; }
+.auth-step p { margin: 0 0 24px; line-height: 1.65; }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.form-grid.compact-grid { grid-template-columns: 1fr; }
+.form-grid label, .slider-card label {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+input, select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 15px;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+}
+input:focus, select:focus { border-color: var(--brand); box-shadow: 0 0 0 4px rgba(110,166,78,0.12); }
+
+.btn {
+  border: 0;
+  border-radius: 14px;
+  padding: 13px 18px;
+  transition: 180ms ease;
+  font-weight: 600;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--brand); color: #fff; }
+.btn-primary:hover { background: var(--brand-dark); }
+.btn-secondary { background: #fff; color: var(--text); border: 1px solid var(--line); }
+.btn-secondary:hover { border-color: var(--brand); color: var(--brand-dark); }
+.btn-block { width: 100%; }
+.btn-small { padding: 10px 14px; font-size: 13px; }
+
+.pairing-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  margin-bottom: 18px;
+  background: linear-gradient(180deg, #fff, #f7fbf5);
+}
+.pairing-title { font-weight: 700; }
+.pairing-sub { color: var(--muted); font-size: 13px; margin-top: 4px; }
+.pairing-pulse {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(110,166,78,0.72) 0%, rgba(110,166,78,0.16) 56%, transparent 57%);
+  animation: pulse 1.9s infinite ease-out;
+}
+@keyframes pulse {
+  0% { transform: scale(0.92); opacity: 0.65; }
+  70% { transform: scale(1.03); opacity: 1; }
+  100% { transform: scale(0.92); opacity: 0.65; }
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 256px 1fr;
+  min-height: 100vh;
+}
+.sidebar {
+  background: #fff;
+  border-right: 1px solid var(--line);
+  padding: 26px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+.sidebar-label {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 10px;
+}
+.sidebar-block { margin-top: 28px; display: grid; gap: 8px; }
+.nav-btn {
+  text-align: left;
+  padding: 13px 14px;
+  border-radius: 14px;
+  border: 0;
+  background: transparent;
+  color: #344054;
+  font-weight: 600;
+}
+.nav-btn:hover { background: #f3f4f6; }
+.nav-btn.active { background: var(--brand-soft); color: var(--brand-dark); }
+.device-pill {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: linear-gradient(180deg, #fff, #f9fbf8);
+}
+.device-status-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.status-dot {
+  width: 10px; height: 10px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 0 6px rgba(110,166,78,0.12);
+}
+.battery { font-weight: 800; color: var(--brand-dark); }
+
+.content { padding: 26px; }
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+.topbar h2 { margin: 0; font-size: clamp(26px, 3vw, 34px); letter-spacing: -0.04em; }
+.top-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.chip {
+  border-radius: 999px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font-size: 13px;
+}
+
+.view { display: none; }
+.view.active { display: block; }
+
+.hero-card, .panel, .stat-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(20, 34, 24, 0.04);
+}
+.hero-card {
+  padding: 28px;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+.hero-card h3, .panel h3 { margin: 0 0 10px; font-size: 24px; letter-spacing: -0.03em; }
+.architecture-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.mini-card {
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  padding: 16px;
+  background: linear-gradient(180deg, #fff, #f9fbf8);
+  display: grid;
+  gap: 8px;
+}
+.mini-card span { color: var(--muted); font-size: 13px; line-height: 1.55; }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.stat-card { padding: 22px; }
+.stat-label { font-size: 13px; color: var(--muted); }
+.stat-value {
+  margin: 12px 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+.stat-value small { font-size: 14px; color: var(--muted); padding-bottom: 8px; }
+.progress {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: #eef2ea;
+  overflow: hidden;
+}
+.progress.large { height: 14px; margin-top: 16px; }
+.progress-fill {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand), #9ad36b);
+  border-radius: inherit;
+  transition: width 400ms ease;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 16px;
+}
+.two-col.wide-right { grid-template-columns: 1.1fr 1fr; }
+.three-col {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 0.9fr;
+  gap: 16px;
+}
+.panel { padding: 24px; }
+.panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.insight-panel { background: linear-gradient(180deg, #fff, #f8fbf6); }
+.bullet-list {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 10px;
+  line-height: 1.6;
+}
+.bullet-list.compact { gap: 8px; font-size: 14px; }
+
+.forecast-layout {
+  display: grid;
+  grid-template-columns: 1.5fr 0.9fr;
+  gap: 18px;
+  align-items: start;
+}
+.slider-card {
+  min-width: 320px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fff, #f8fbf6);
+}
+.slider-card input[type="range"] { padding: 0; box-shadow: none; }
+.slider-labels {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.slider-labels strong { color: var(--brand-dark); font-size: 16px; }
+.forecast-side { display: grid; gap: 14px; }
+.insight-box, .reco-box, .result-box, .ota-card, .share-card {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  background: linear-gradient(180deg, #fff, #f8fbf6);
+}
+.metric-stack { display: grid; gap: 12px; }
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #e5e7eb;
+}
+.metric-row:last-child { padding-bottom: 0; border-bottom: 0; }
+.ota-row { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; padding: 10px 0; border-bottom: 1px dashed #e5e7eb; }
+.ota-row:last-child { border-bottom: 0; }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: left; padding: 12px 8px; border-bottom: 1px solid #edf0ea; }
+th { color: var(--muted); font-weight: 600; }
+.feed-grid { display: grid; gap: 14px; }
+.feed-card {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 18px;
+  background: #fff;
+}
+.feed-card h4, .recipe-item h4, .share-card h4 { margin: 0 0 8px; font-size: 18px; }
+.feed-top, .feed-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.feed-stats { margin-top: 16px; }
+.tag, .share-badges span {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 7px 11px;
+  background: var(--brand-soft);
+  color: var(--brand-dark);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.impact-grid { margin-bottom: 16px; }
+.impact-score-wrap {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 22px;
+  align-items: center;
+}
+.score-ring {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: conic-gradient(var(--brand) 0deg 310deg, #ebf0e7 310deg 360deg);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.score-ring::after {
+  content: "";
+  width: 118px;
+  height: 118px;
+  border-radius: 50%;
+  background: #fff;
+  position: absolute;
+}
+.score-ring span {
+  position: relative;
+  z-index: 1;
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+.share-card { min-height: 220px; display: grid; align-content: start; gap: 12px; }
+.share-card p { margin: 0; line-height: 1.7; color: var(--muted); }
+.share-badges { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.recipe-list { display: grid; gap: 14px; }
+.recipe-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fff, #f9fbf8);
+}
+
+.toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  padding: 14px 16px;
+  background: #122117;
+  color: #fff;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  z-index: 100;
+  min-width: 280px;
+}
+
+canvas { width: 100% !important; max-height: 360px; }
+
+@media (max-width: 1200px) {
+  .stats-grid, .impact-grid { grid-template-columns: repeat(2, 1fr); }
+  .two-col, .three-col, .forecast-layout, .hero-card, .impact-score-wrap { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { border-right: 0; border-bottom: 1px solid var(--line); }
+}
+
+@media (max-width: 720px) {
+  .content { padding: 18px; }
+  .form-grid, .stats-grid, .impact-grid { grid-template-columns: 1fr; }
+  .topbar { flex-direction: column; }
+  .slider-card { min-width: 0; width: 100%; }
+  .recipe-item { flex-direction: column; align-items: flex-start; }
+  .auth-card { padding: 24px; }
+}
+
+</style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div id="auth-overlay" class="auth-overlay">
+    <div class="auth-card" id="auth-card">
+      <div class="brand-mark">Fit-Flavor.</div>
+      <div class="auth-step active" data-step="login">
+        <div class="eyebrow">Simple · Measurable · Repeatable</div>
+        <h1>把量化调味，升级成一套可预测的健康操作系统</h1>
+        <p class="muted">当前版本把原有 MVP 继续深化为六层架构界面，覆盖登录绑定、数据分析、预测预警、设备校准、OTA 升级、社区增长与健康影响闭环。</p>
+        <div class="form-grid">
+          <label>
+            <span>邮箱</span>
+            <input type="email" value="samuel@cuhk.edu.cn" />
+          </label>
+          <label>
+            <span>密码</span>
+            <input type="password" value="********" />
+          </label>
+        </div>
+        <button class="btn btn-primary btn-block" id="enter-btn">登录并进入控制台</button>
+      </div>
+
+      <div class="auth-step" data-step="pairing">
+        <div class="eyebrow">Device Handshake</div>
+        <h1>连接 ECO4 手柄</h1>
+        <p class="muted">长按蓝牙键 3 秒。当前页面演示设备发现、同步与状态回传流程。</p>
+        <div class="pairing-box">
+          <div class="pairing-pulse"></div>
+          <div>
+            <div class="pairing-title">附近设备</div>
+            <div class="pairing-sub">ECO4-Alpha · 电量 86% · Firmware v1.8.2</div>
+          </div>
+        </div>
+        <div class="row gap-sm">
+          <button class="btn btn-primary flex-1" id="pair-btn">搜索并连接</button>
+          <button class="btn btn-secondary" id="skip-btn">跳过</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-shell hidden" id="app-shell">
+    <aside class="sidebar">
+      <div>
+        <div class="logo">Fit-Flavor.</div>
+        <div class="sidebar-block">
+          <div class="sidebar-label">Architecture Views</div>
+          <button class="nav-btn active" data-view="overview">总览中枢</button>
+          <button class="nav-btn" data-view="forecast">预测引擎</button>
+          <button class="nav-btn" data-view="device">设备中台</button>
+          <button class="nav-btn" data-view="community">社区增长</button>
+          <button class="nav-btn" data-view="impact">健康影响</button>
+          <button class="nav-btn" data-view="library">配方资产</button>
+        </div>
+      </div>
+      <div class="device-pill">
+        <div>
+          <div class="device-status-row">
+            <span class="status-dot"></span>
+            <strong>ECO4 已连接</strong>
+          </div>
+          <div class="small muted">BLE 延迟 118ms · 上次校准 2 天前</div>
+        </div>
+        <div class="battery">86%</div>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">Fit-Flavor OS</div>
+          <h2 id="page-title">总览中枢</h2>
+        </div>
+        <div class="top-actions">
+          <div class="chip">本周风险等级: <strong id="risk-chip">中</strong></div>
+          <button class="btn btn-secondary" id="share-impact-btn">生成分享卡片</button>
+        </div>
+      </header>
+
+      <section class="view active" id="view-overview">
+        <div class="hero-card">
+          <div>
+            <div class="eyebrow">System Architecture</div>
+            <h3>从“可视化仪表盘”升级到“预测与执行操作系统”</h3>
+            <p class="muted">当前信息架构拆成 4 层。设备采集层负责事件记录与状态回传，数据层负责长周期特征与窗口函数统计，智能层负责趋势预测与预警，增长层负责复刻成功率、健康影响力与内容分发。</p>
+          </div>
+          <div class="architecture-grid">
+            <div class="mini-card"><strong>1. Device Events</strong><span>dispense events · battery · clogging · latency</span></div>
+            <div class="mini-card"><strong>2. Analytics</strong><span>7d/30d rolling avg · deviation · usage segmentation</span></div>
+            <div class="mini-card"><strong>3. Prediction</strong><span>weekend sodium risk · intervention simulation</span></div>
+            <div class="mini-card"><strong>4. Growth Loop</strong><span>clone success rate · impact score · recipe ranking</span></div>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <span class="stat-label">今日钠摄入</span>
+            <div class="stat-value"><span id="today-sodium">5.4</span><small>g</small></div>
+            <div class="progress"><div id="today-sodium-bar" class="progress-fill"></div></div>
+            <p class="small muted">对照世卫建议线 5.0g</p>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">30 天滑动均值</span>
+            <div class="stat-value"><span id="rolling-avg">5.18</span><small>g</small></div>
+            <p class="small muted">过滤掉单日波动后的真实饮食基准</p>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">预测周末风险</span>
+            <div class="stat-value"><span id="weekend-risk">+8%</span><small>vs 基线</small></div>
+            <p class="small muted">基于近 4 周习惯模式的演示值</p>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">社区复刻成功率</span>
+            <div class="stat-value"><span>71</span><small>%</small></div>
+            <p class="small muted">高于仅看点赞数的内容质量指标</p>
+          </article>
+        </div>
+
+        <div class="two-col">
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <div class="eyebrow">Analytics Snapshot</div>
+                <h3>过去 7 天实际摄入</h3>
+              </div>
+            </div>
+            <canvas id="overviewChart"></canvas>
+          </article>
+          <article class="panel insight-panel">
+            <div class="eyebrow">Architecture Decisions</div>
+            <h3>这版深化了什么</h3>
+            <ul class="bullet-list">
+              <li>加入可交互的未来 7 天干预模拟，不再只是看历史线。</li>
+              <li>把设备校准放进前端中台，支持偏差补偿参数回写。</li>
+              <li>加入 OTA 升级入口，把固件迭代纳入产品触点。</li>
+              <li>社区推荐从点赞排序，升级为“下载 + 执行 + 复刻成功率”排序。</li>
+              <li>新增个人健康影响看板，强化可分享的正反馈闭环。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="view-forecast">
+        <div class="panel">
+          <div class="panel-head wrap">
+            <div>
+              <div class="eyebrow">Time-Series Forecasting</div>
+              <h3>调味摄入趋势预测演示器</h3>
+              <p class="muted">通过拖动干预力度，模拟系统如何从历史数据推演未来 7 天走向。</p>
+            </div>
+            <div class="slider-card">
+              <label for="intervention-slider">未来 7 天饮食干预力度</label>
+              <input id="intervention-slider" type="range" min="0" max="100" value="50" />
+              <div class="slider-labels">
+                <span>极度放纵 (0)</span>
+                <strong id="intervention-value">50</strong>
+                <span>严格控制 (100)</span>
+              </div>
+            </div>
+          </div>
+          <div class="forecast-layout">
+            <div>
+              <canvas id="forecastChart"></canvas>
+            </div>
+            <aside class="forecast-side">
+              <div class="insight-box" id="forecast-insight"></div>
+              <div class="metric-stack">
+                <div class="metric-row"><span>预测末日摄入</span><strong id="forecast-end">5.1g</strong></div>
+                <div class="metric-row"><span>预测未来 7 日日均</span><strong id="forecast-avg">5.3g</strong></div>
+                <div class="metric-row"><span>是否触线</span><strong id="forecast-status">轻微高于建议线</strong></div>
+              </div>
+              <div class="reco-box">
+                <div class="eyebrow">Recommended Actions</div>
+                <ul class="bullet-list compact" id="forecast-actions"></ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-device">
+        <div class="three-col">
+          <article class="panel">
+            <div class="eyebrow">Calibration UI</div>
+            <h3>设备校准面板</h3>
+            <div class="form-grid compact-grid">
+              <label>
+                <span>校准头类型</span>
+                <select id="head-select">
+                  <option value="spray">喷雾头 Spray</option>
+                  <option value="dry">粉末头 Dry</option>
+                  <option value="precision">精准液体头 Precision</option>
+                </select>
+              </label>
+              <label>
+                <span>理论单次输出</span>
+                <input id="target-output" type="number" step="0.1" value="1.0" />
+              </label>
+              <label>
+                <span>实际称重输出</span>
+                <input id="actual-output" type="number" step="0.1" value="0.8" />
+              </label>
+            </div>
+            <button class="btn btn-primary" id="calibrate-btn">计算并下发补偿参数</button>
+            <div class="result-box" id="calibration-result">当前建议补偿: +25.0% 输出增益。适用于轻微堵塞或电量衰减场景。</div>
+          </article>
+
+          <article class="panel">
+            <div class="eyebrow">OTA Console</div>
+            <h3>固件升级入口</h3>
+            <div class="ota-card">
+              <div class="ota-row"><span>当前版本</span><strong>v1.8.2</strong></div>
+              <div class="ota-row"><span>可升级版本</span><strong>v1.9.0</strong></div>
+              <div class="ota-row"><span>升级内容</span><strong>喷雾脉冲更稳定，低电量漂移降低</strong></div>
+            </div>
+            <button class="btn btn-primary" id="ota-btn">开始 OTA 升级</button>
+            <div class="progress large"><div id="ota-progress" class="progress-fill"></div></div>
+            <p class="small muted" id="ota-text">尚未开始升级</p>
+          </article>
+
+          <article class="panel">
+            <div class="eyebrow">Device Health</div>
+            <h3>设备遥测</h3>
+            <div class="metric-stack">
+              <div class="metric-row"><span>BLE 同步延迟</span><strong>118ms</strong></div>
+              <div class="metric-row"><span>最近 24h 同步成功率</span><strong>98.7%</strong></div>
+              <div class="metric-row"><span>喷雾头阻塞风险</span><strong>低</strong></div>
+              <div class="metric-row"><span>建议下次校准</span><strong>2 天后</strong></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="view-community">
+        <div class="two-col wide-right">
+          <article class="panel">
+            <div class="eyebrow">Ranking Logic</div>
+            <h3>按复刻成功率排序，而不是只按点赞排序</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>配方</th>
+                    <th>下载量</th>
+                    <th>执行量</th>
+                    <th>复刻成功率</th>
+                    <th>推荐权重</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>零卡油醋沙拉</td>
+                    <td>1,284</td>
+                    <td>913</td>
+                    <td>78%</td>
+                    <td>高</td>
+                  </tr>
+                  <tr>
+                    <td>低钠鸡胸轻食</td>
+                    <td>996</td>
+                    <td>735</td>
+                    <td>74%</td>
+                    <td>高</td>
+                  </tr>
+                  <tr>
+                    <td>微辣牛排法则</td>
+                    <td>1,620</td>
+                    <td>641</td>
+                    <td>52%</td>
+                    <td>中</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="small muted">前端层面已经把排序逻辑显式化。后端只要补上“下载事件 + 真实执行事件 + 用户结果反馈”三类日志，就能支持这个推荐机制。</p>
+          </article>
+
+          <article class="panel">
+            <div class="eyebrow">Community Feed</div>
+            <h3>内容卡片</h3>
+            <div class="feed-grid">
+              <div class="feed-card">
+                <div class="feed-top">
+                  <span class="tag">Top Clone</span>
+                  <span>427 kcal</span>
+                </div>
+                <h4>减脂期低钠酱汁</h4>
+                <p class="muted">下载后 7 日内真实执行率 76%，高于社区均值 18 个百分点。</p>
+                <div class="feed-stats"><span>❤️ 342</span><span>⬇️ 621</span><span>🎯 复刻成功 78%</span></div>
+              </div>
+              <div class="feed-card">
+                <div class="feed-top">
+                  <span class="tag">New</span>
+                  <span>590 kcal</span>
+                </div>
+                <h4>完美牛排克重比</h4>
+                <p class="muted">点赞很高，但真实执行转化一般，适合作为高曝光内容，不适合作为健康优先推荐。</p>
+                <div class="feed-stats"><span>❤️ 801</span><span>⬇️ 318</span><span>🎯 复刻成功 52%</span></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="view-impact">
+        <div class="stats-grid impact-grid">
+          <article class="stat-card impact-card"><span class="stat-label">累计精准控制天数</span><div class="stat-value"><span>100</span><small>天</small></div></article>
+          <article class="stat-card impact-card"><span class="stat-label">累计减少热量</span><div class="stat-value"><span>15000</span><small>kcal</small></div></article>
+          <article class="stat-card impact-card"><span class="stat-label">估算体重变化</span><div class="stat-value"><span>2.0</span><small>kg</small></div></article>
+          <article class="stat-card impact-card"><span class="stat-label">减少塑料调味瓶</span><div class="stat-value"><span>3</span><small>瓶</small></div></article>
+        </div>
+        <div class="two-col">
+          <article class="panel">
+            <div class="eyebrow">Health & Sustainability Impact</div>
+            <h3>个人影响力评分</h3>
+            <div class="impact-score-wrap">
+              <div class="score-ring"><span>86</span></div>
+              <div class="metric-stack">
+                <div class="metric-row"><span>健康控制维度</span><strong>88 / 100</strong></div>
+                <div class="metric-row"><span>执行一致性维度</span><strong>81 / 100</strong></div>
+                <div class="metric-row"><span>可持续行为维度</span><strong>89 / 100</strong></div>
+              </div>
+            </div>
+          </article>
+          <article class="panel">
+            <div class="eyebrow">Shareable Card</div>
+            <h3>可分享摘要</h3>
+            <div class="share-card" id="share-card">
+              <div class="brand-mark small-brand">Fit-Flavor.</div>
+              <h4>过去 100 天，饮食控制更稳定了。</h4>
+              <p>累计少摄入 15,000 kcal，等价约 2.0 kg 体重变化，并减少 3 瓶塑料调味瓶消耗。</p>
+              <div class="share-badges"><span>量化调味</span><span>健康习惯</span><span>可持续</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="view-library">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <div class="eyebrow">Recipe Assets</div>
+              <h3>配方即资产，资产可执行</h3>
+            </div>
+            <button class="btn btn-primary" id="sync-recipe-btn">保存并同步新配方</button>
+          </div>
+          <div class="recipe-list" id="recipe-list">
+            <div class="recipe-item">
+              <div>
+                <h4>早餐煎蛋燕麦碗</h4>
+                <p class="muted">喷雾头 1ml · 粉末头 0.5g · 低钠模式</p>
+              </div>
+              <div class="row gap-sm"><span class="chip">原创</span><button class="btn btn-secondary btn-small">一键执行</button></div>
+            </div>
+            <div class="recipe-item">
+              <div>
+                <h4>泰式罗勒轻食</h4>
+                <p class="muted">鱼露 5ml · 盐 1.2g · 油 3ml</p>
+              </div>
+              <div class="row gap-sm"><span class="chip">社区下载</span><button class="btn btn-secondary btn-small">一键执行</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+  <script>
+const historicalSodium = [5.2, 4.8, 5.5, 6.1, 4.9, 5.8, 5.4];
+const thirtyDaySeries = [4.7,4.8,5.1,5.3,5.4,4.9,5.0,5.2,5.6,5.8,5.4,5.1,5.0,4.9,5.4,5.6,5.2,5.1,5.3,5.5,5.0,4.8,5.1,5.4,5.7,5.3,5.2,5.1,5.0,5.4];
+
+const state = {
+  currentView: 'overview',
+  intervention: 50,
+  overviewChart: null,
+  forecastChart: null,
+};
+
+const els = {
+  authOverlay: document.getElementById('auth-overlay'),
+  appShell: document.getElementById('app-shell'),
+  enterBtn: document.getElementById('enter-btn'),
+  pairBtn: document.getElementById('pair-btn'),
+  skipBtn: document.getElementById('skip-btn'),
+  pageTitle: document.getElementById('page-title'),
+  navBtns: document.querySelectorAll('.nav-btn'),
+  interventionSlider: document.getElementById('intervention-slider'),
+  interventionValue: document.getElementById('intervention-value'),
+  forecastInsight: document.getElementById('forecast-insight'),
+  forecastEnd: document.getElementById('forecast-end'),
+  forecastAvg: document.getElementById('forecast-avg'),
+  forecastStatus: document.getElementById('forecast-status'),
+  forecastActions: document.getElementById('forecast-actions'),
+  calibrateBtn: document.getElementById('calibrate-btn'),
+  targetOutput: document.getElementById('target-output'),
+  actualOutput: document.getElementById('actual-output'),
+  calibrationResult: document.getElementById('calibration-result'),
+  otaBtn: document.getElementById('ota-btn'),
+  otaProgress: document.getElementById('ota-progress'),
+  otaText: document.getElementById('ota-text'),
+  syncRecipeBtn: document.getElementById('sync-recipe-btn'),
+  recipeList: document.getElementById('recipe-list'),
+  shareImpactBtn: document.getElementById('share-impact-btn'),
+  toast: document.getElementById('toast'),
+  riskChip: document.getElementById('risk-chip'),
+  todaySodium: document.getElementById('today-sodium'),
+  todaySodiumBar: document.getElementById('today-sodium-bar'),
+  rollingAvg: document.getElementById('rolling-avg'),
+  weekendRisk: document.getElementById('weekend-risk'),
+};
+
+function rollingAverage(values) {
+  return values.reduce((sum, value) => sum + value, 0) / values.length;
+}
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function mean(values) {
+  return values.reduce((sum, value) => sum + value, 0) / values.length;
+}
+
+function forecastSeries(intervention) {
+  const avg = mean(historicalSodium);
+  const last = historicalSodium[historicalSodium.length - 1];
+  const strictTarget = 4.0;
+  const indulgentTarget = Math.max(avg + 1.1, 6.4);
+  const target = indulgentTarget - ((indulgentTarget - strictTarget) * intervention / 100);
+  const volatility = 0.55 - intervention * 0.003;
+
+  const predicted = Array.from({ length: 7 }, (_, index) => {
+    const decay = (index + 1) / 7;
+    const baseline = last + (target - last) * decay;
+    const seasonal = Math.sin(index * 1.15) * clamp(volatility, 0.12, 0.55);
+    return Number(clamp(baseline + seasonal, 3.4, 7.4).toFixed(2));
+  });
+
+  return predicted;
+}
+
+function recommendationSet(intervention, avgFuture) {
+  if (intervention >= 80) {
+    return [
+      '系统建议把社区流置顶为低钠配方，并默认启用“轻油模式”。',
+      '推荐保持当前控制强度，重点监控周末外食场景。',
+      '设备侧建议每 3 天进行一次喷雾头微校准，避免低剂量漂移。'
+    ];
+  }
+  if (intervention >= 40) {
+    return [
+      '建议在周四提前推送 3 个低钠替代方案，降低周末超标概率。',
+      '对高钠酱料启用单次剂量上限提醒。',
+      '把历史复刻成功率高的健康配方提升推荐权重。'
+    ];
+  }
+  return [
+    '模型预计有连续触线风险，建议立即切换到低钠预设。',
+    '对酱油与盐的日累计值开启红线提醒。',
+    '社区流应降权高热量高钠内容，优先展示复刻成功率高的替代方案。'
+  ];
+}
+
+function insightText(intervention, endValue, avgFuture) {
+  if (intervention >= 80) {
+    return `模型预测：在当前干预力度下，下周日均钠摄入将下降至 ${avgFuture.toFixed(1)}g，末日收敛到 ${endValue.toFixed(1)}g，回到安全区间。`;
+  }
+  if (intervention >= 40) {
+    return `模型预测：在当前干预力度下，下周日均钠摄入约为 ${avgFuture.toFixed(1)}g，整体趋于平稳，但仍需关注周末波动。`;
+  }
+  return `模型预测：在当前干预力度下，下周日均钠摄入将升至 ${avgFuture.toFixed(1)}g，连续触及建议线上方，存在明显超标风险。`;
+}
+
+function statusLabel(avgFuture) {
+  if (avgFuture <= 5.0) return '安全区间';
+  if (avgFuture <= 5.4) return '轻微高于建议线';
+  return '明显高于建议线';
+}
+
+function toast(message) {
+  els.toast.textContent = message;
+  els.toast.classList.remove('hidden');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => els.toast.classList.add('hidden'), 2400);
+}
+
+function switchView(viewName) {
+  state.currentView = viewName;
+  document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+  document.getElementById(`view-${viewName}`).classList.add('active');
+  els.navBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.view === viewName));
+
+  const titles = {
+    overview: '总览中枢',
+    forecast: '预测引擎',
+    device: '设备中台',
+    community: '社区增长',
+    impact: '健康影响',
+    library: '配方资产'
+  };
+  els.pageTitle.textContent = titles[viewName] || 'Fit-Flavor OS';
+}
+
+function initOverviewChart() {
+  const ctx = document.getElementById('overviewChart');
+  state.overviewChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['D1','D2','D3','D4','D5','D6','D7'],
+      datasets: [
+        {
+          label: '历史摄入',
+          data: historicalSodium,
+          borderColor: '#6ea64e',
+          backgroundColor: 'rgba(110,166,78,0.14)',
+          fill: true,
+          tension: 0.35,
+          pointRadius: 4,
+          pointHoverRadius: 4,
+        },
+        {
+          label: 'WHO 建议线',
+          data: Array(7).fill(5.0),
+          borderColor: '#c2c8bf',
+          borderDash: [6, 6],
+          pointRadius: 0,
+          fill: false,
+        }
+      ]
+    },
+    options: chartOptions('g')
+  });
+}
+
+function segmentedForecastData(values) {
+  return values.map(v => Number(v.toFixed(2)));
+}
+
+function initForecastChart() {
+  const ctx = document.getElementById('forecastChart');
+  const predicted = forecastSeries(state.intervention);
+  state.forecastChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['过去1','过去2','过去3','过去4','过去5','过去6','过去7','未来1','未来2','未来3','未来4','未来5','未来6','未来7'],
+      datasets: [
+        {
+          label: '历史数据',
+          data: [...historicalSodium, ...Array(7).fill(null)],
+          borderColor: '#2f6f3e',
+          backgroundColor: 'rgba(47,111,62,0.08)',
+          tension: 0.35,
+          pointRadius: 4,
+          pointHoverRadius: 4,
+        },
+        {
+          label: '预测趋势',
+          data: [...Array(7).fill(null), ...segmentedForecastData(predicted)],
+          borderColor: '#ef8f35',
+          segment: {
+            borderColor: (ctx) => {
+              const y = ctx.p1.parsed.y;
+              if (y == null) return '#ef8f35';
+              return y <= 5 ? '#6ea64e' : y <= 5.5 ? '#ef8f35' : '#d95d39';
+            }
+          },
+          borderDash: [8, 6],
+          tension: 0.35,
+          pointRadius: 4,
+          pointHoverRadius: 4,
+        },
+        {
+          label: 'WHO 建议线',
+          data: Array(14).fill(5.0),
+          borderColor: '#c2c8bf',
+          borderDash: [5, 5],
+          pointRadius: 0,
+          fill: false,
+        }
+      ]
+    },
+    options: chartOptions('g', 8)
+  });
+  refreshForecastPanel();
+}
+
+function chartOptions(unit, maxY = 8) {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          usePointStyle: true,
+          boxWidth: 8,
+          font: { family: 'Inter' }
+        }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: maxY,
+        grid: { color: '#edf0ea' },
+        ticks: {
+          callback: value => `${value}${unit}`
+        }
+      },
+      x: {
+        grid: { display: false }
+      }
+    }
+  };
+}
+
+function refreshForecastPanel() {
+  const intervention = Number(els.interventionSlider.value);
+  state.intervention = intervention;
+  els.interventionValue.textContent = String(intervention);
+
+  const predicted = forecastSeries(intervention);
+  const avgFuture = mean(predicted);
+  const endValue = predicted[predicted.length - 1];
+  const status = statusLabel(avgFuture);
+
+  state.forecastChart.data.datasets[1].data = [...Array(7).fill(null), ...segmentedForecastData(predicted)];
+  state.forecastChart.update();
+
+  els.forecastInsight.textContent = insightText(intervention, endValue, avgFuture);
+  els.forecastEnd.textContent = `${endValue.toFixed(1)}g`;
+  els.forecastAvg.textContent = `${avgFuture.toFixed(1)}g`;
+  els.forecastStatus.textContent = status;
+  els.forecastActions.innerHTML = recommendationSet(intervention, avgFuture)
+    .map(item => `<li>${item}</li>`)
+    .join('');
+
+  const riskText = avgFuture <= 5.0 ? '低' : avgFuture <= 5.4 ? '中' : '高';
+  els.riskChip.textContent = riskText;
+}
+
+function calculateCalibration() {
+  const target = Number(els.targetOutput.value);
+  const actual = Number(els.actualOutput.value);
+
+  if (!target || !actual || target <= 0 || actual <= 0) {
+    els.calibrationResult.textContent = '请输入有效的理论值与实际值。';
+    return;
+  }
+
+  const correction = ((target - actual) / actual) * 100;
+  const direction = correction >= 0 ? '+' : '-';
+  const corrected = Math.abs(correction).toFixed(1);
+  els.calibrationResult.textContent = `当前建议补偿: ${direction}${corrected}% 输出增益。系统会把该参数写入控制板，用于下次执行时的偏差补偿。`;
+  toast('补偿参数已计算，模拟下发完成');
+}
+
+function runOTA() {
+  els.otaProgress.style.width = '0%';
+  els.otaText.textContent = '正在下载升级包...';
+  let progress = 0;
+  const timer = setInterval(() => {
+    progress += 14;
+    els.otaProgress.style.width = `${Math.min(progress, 100)}%`;
+
+    if (progress >= 35) {
+      els.otaText.textContent = '正在校验签名并刷写固件...';
+    }
+    if (progress >= 70) {
+      els.otaText.textContent = '正在重启设备并回传版本信息...';
+    }
+    if (progress >= 100) {
+      clearInterval(timer);
+      els.otaText.textContent = '升级完成，当前版本 v1.9.0';
+      toast('OTA 升级完成');
+    }
+  }, 320);
+}
+
+function addRecipe() {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'recipe-item';
+  wrapper.innerHTML = `
+    <div>
+      <h4>本周低钠替代方案</h4>
+      <p class="muted">系统根据预测风险自动生成 · 盐 0.9g · 酱汁 4ml · 喷雾油 2ml</p>
+    </div>
+    <div class="row gap-sm"><span class="chip">自动推荐</span><button class="btn btn-secondary btn-small">一键执行</button></div>
+  `;
+  els.recipeList.prepend(wrapper);
+  toast('新配方已保存到配方资产库');
+}
+
+function shareCard() {
+  toast('分享卡片已生成，可直接用于社交传播');
+}
+
+function initializeStaticMetrics() {
+  const current = historicalSodium[historicalSodium.length - 1];
+  const avg30 = rollingAverage(thirtyDaySeries);
+  els.todaySodium.textContent = current.toFixed(1);
+  els.todaySodiumBar.style.width = `${Math.min(current / 5 * 100, 100)}%`;
+  els.rollingAvg.textContent = avg30.toFixed(2);
+  const weekendDeviation = ((mean(historicalSodium.slice(-2)) - avg30) / avg30) * 100;
+  const sign = weekendDeviation >= 0 ? '+' : '';
+  els.weekendRisk.textContent = `${sign}${weekendDeviation.toFixed(0)}%`;
+}
+
+function bindEvents() {
+  els.enterBtn.addEventListener('click', () => {
+    document.querySelector('[data-step="login"]').classList.remove('active');
+    document.querySelector('[data-step="pairing"]').classList.add('active');
+  });
+
+  [els.pairBtn, els.skipBtn].forEach(btn => btn.addEventListener('click', () => {
+    els.authOverlay.classList.add('hidden');
+    els.appShell.classList.remove('hidden');
+    toast('已进入架构深化版控制台');
+  }));
+
+  els.navBtns.forEach(btn => btn.addEventListener('click', () => switchView(btn.dataset.view)));
+  els.interventionSlider.addEventListener('input', refreshForecastPanel);
+  els.calibrateBtn.addEventListener('click', calculateCalibration);
+  els.otaBtn.addEventListener('click', runOTA);
+  els.syncRecipeBtn.addEventListener('click', addRecipe);
+  els.shareImpactBtn.addEventListener('click', shareCard);
+}
+
+function init() {
+  initializeStaticMetrics();
+  initOverviewChart();
+  initForecastChart();
+  bindEvents();
+}
+
+init();
+
+</script>
+</body>
+</html>
